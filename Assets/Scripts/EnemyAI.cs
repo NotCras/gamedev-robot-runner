@@ -71,8 +71,11 @@ public class EnemyAI : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+    }
 
-
+    public void OnDamageTaken()
+    {
+        isProvoked = true;
     }
     private void OnDrawGizmos()
     {

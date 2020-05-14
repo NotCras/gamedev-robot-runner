@@ -30,10 +30,5 @@ public class EnemyAttack : MonoBehaviour
         target.PlayerTakeDamage(damage);
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
