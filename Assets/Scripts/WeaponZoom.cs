@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class WeaponZoom : MonoBehaviour
 {
     [SerializeField] private float zoomedInFOV = 35f;
     [SerializeField] private float regularFOV = 60f;
+    
+    [SerializeField] private float zoomedInMouse = 0.5f;
+    [SerializeField] private float regularMouse = 2f;
+    
     //[SerializeField] 
     private Camera player;
-
+    private RigidbodyFirstPersonController playerMouse;
     private bool zoomedInToggle = false;
     
     // Start is called before the first frame update
@@ -17,6 +22,11 @@ public class WeaponZoom : MonoBehaviour
     {
         player = FindObjectOfType<Camera>();
         player.fieldOfView = regularFOV;
+
+        playerMouse = GetComponent<RigidbodyFirstPersonController>();
+        
+        playerMouse.mouseLook.XSensitivity = regularMouse;
+        playerMouse.mouseLook.YSensitivity = regularMouse;
     }
 
     // Update is called once per frame
@@ -30,10 +40,15 @@ public class WeaponZoom : MonoBehaviour
         if(zoomedInToggle)
         {
             player.fieldOfView = zoomedInFOV;
+            
+            playerMouse.mouseLook.XSensitivity = zoomedInMouse;
+            playerMouse.mouseLook.YSensitivity = zoomedInMouse;
         }
         else
         {
             player.fieldOfView = regularFOV;
+            playerMouse.mouseLook.XSensitivity = regularMouse;
+            playerMouse.mouseLook.YSensitivity = regularMouse;
         }
         
     }
