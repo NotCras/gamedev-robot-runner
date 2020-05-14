@@ -2974,6 +2974,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1321720324}
+    - target: {fileID: 8641051734685507092, guid: e42755b1a0565f0ac80dd5e222ccdc0e,
+        type: 3}
+      propertyPath: turnSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8641051734685507115, guid: e42755b1a0565f0ac80dd5e222ccdc0e,
         type: 3}
       propertyPath: m_LocalPosition.x
