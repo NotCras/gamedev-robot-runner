@@ -10,12 +10,15 @@ public class PlayerHealth : MonoBehaviour
     public void PlayerTakeDamage(float damage)
     {
         playerHealth -= damage;
-        Debug.Log("Ouch! I lost some health!");
+        //Debug.Log("Ouch! I lost some health!");
 
         if (playerHealth <= 0)
         {
-            Debug.Log("Player is dead!! ");
-            
+            //Debug.Log("Player is dead!! ");
+
+            DeathHandler death = FindObjectOfType<DeathHandler>();
+            death.HandleDeath();
+
         }
             
         
