@@ -37,8 +37,6 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         bool madehit = Physics.Raycast(fpcamera.transform.position, fpcamera.transform.forward, out hit, range);
 
-        
-        
         try
         {
             if (madehit)
@@ -58,7 +56,7 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        enemy.takeDamage(weaponDamage);
+        enemy.TakeDamage(weaponDamage);
     }
 
     private void CreateHitImpact(RaycastHit r)

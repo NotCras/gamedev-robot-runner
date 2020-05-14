@@ -33,6 +33,8 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
+            GetComponent<Animator>().SetBool("attack", false);
+            GetComponent<Animator>().SetTrigger("idle");
             navMeshAgent.SetDestination(transform.position);
         }
     }
@@ -52,12 +54,14 @@ public class EnemyAI : MonoBehaviour
 
     private void ChaseTarget()
     {
+        GetComponent<Animator>().SetBool("attack", false);
+        GetComponent<Animator>().SetTrigger("move");
         navMeshAgent.SetDestination(target.position);
     }
 
     private void AttackTarget()
     {
-        print("I'm attacking you. -Over.");
+        GetComponent<Animator>().SetBool("attack", true);
     }
     private void OnDrawGizmos()
     {
