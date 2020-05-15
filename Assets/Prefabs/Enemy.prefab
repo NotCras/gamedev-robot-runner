@@ -321,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   chaseRange: 15
-  turnSpeed: 4
+  turnSpeed: 3
 --- !u!95 &2312433653305267388
 Animator:
   serializedVersion: 3

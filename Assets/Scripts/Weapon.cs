@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
@@ -11,9 +12,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private GameObject impactFlash;
     [SerializeField] private Ammo ammoSlot;
+    [SerializeField] private AmmoType ammoType;
     [SerializeField] private float timeBetweenShots = 0.5f;
 
     private bool canShoot = true;
+
+    private void OnEnable()
+    {
+        canShoot = true;
+    }
 
     void Update()
     {
@@ -27,11 +34,11 @@ public class Weapon : MonoBehaviour
     IEnumerator Shoot()
     {
         canShoot = false;
-        if (ammoSlot.GetCurrentAmmo() > 0)
+        if (ammoSlot.GetCurrentAmmo(ammoType) > 0)
         {
             PlayMuzzleFlash();
             ProcessRaycast();
-            ammoSlot.ReduceCurrentAmmo();
+            ammoSlot.ReduceCurrentAmmo(ammoType);
         }
 
         yield return new WaitForSeconds(timeBetweenShots);
@@ -53,12 +60,11 @@ public class Weapon : MonoBehaviour
             if (madehit)
             {
                 CreateHitImpact(hit);
-                print("I hit " + hit.transform.name);
             }
         }
         catch
         {
-            print("I didn't hit anything.");
+            
         }
 
         EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>();

@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class WeaponSwitcher : MonoBehaviour
 {
     [SerializeField] int currentWeapon = 0;
 
+    
     void Start()
     {
-        setWeaponActive();
+        SetWeaponActive();
     }
     
-    void setWeaponActive()
+    void SetWeaponActive()
     {
         int weaponIndex = 0;
         foreach (Transform weapon in transform)
@@ -19,7 +21,6 @@ public class WeaponSwitcher : MonoBehaviour
             if (weaponIndex == currentWeapon)
             {
                 weapon.gameObject.SetActive(true);
-                
             }
             else
             {
@@ -39,7 +40,7 @@ public class WeaponSwitcher : MonoBehaviour
 
         if (previousWeapon != currentWeapon)
         {
-            setWeaponActive();
+            SetWeaponActive();
         }
         
     }
@@ -62,7 +63,7 @@ public class WeaponSwitcher : MonoBehaviour
     
     private void ProcessScrollWheel()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") < 0f)
         {
             if (currentWeapon >= transform.childCount - 1)
             {
@@ -71,9 +72,10 @@ public class WeaponSwitcher : MonoBehaviour
             else
             {
                 currentWeapon++;
+                Debug.Log("Scroll wheel forward!");
             }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        else if (CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") > 0f)
         {
             if (currentWeapon <= 0)
             {
@@ -82,6 +84,7 @@ public class WeaponSwitcher : MonoBehaviour
             else
             {
                 currentWeapon--;
+                Debug.Log("Scroll wheel backward!");
             }
         }
     }

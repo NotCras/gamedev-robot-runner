@@ -388,6 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5274077405164334758}
+  - component: {fileID: 8652653789837522352}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -412,6 +413,19 @@ Transform:
   m_Father: {fileID: 1434062859044422285}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8652653789837522352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778479986898939172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdb516979270cf289d4a74a10c22ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: 0
 --- !u!1001 &69848848899398962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -478,6 +492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sci-Fi Rifle_fbx
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572070136043687436, guid: 534c83a8352154fbdab3279fca1a102c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8023597081574059206, guid: 534c83a8352154fbdab3279fca1a102c,
         type: 3}
@@ -705,9 +724,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaad727b67e004b408be5595d3d8a829, type: 3}
---- !u!198 &8359720271159734509 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8058783610192676388, guid: aaad727b67e004b408be5595d3d8a829,
+--- !u!1 &2004156297714508731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1420827811599730, guid: aaad727b67e004b408be5595d3d8a829,
     type: 3}
   m_PrefabInstance: {fileID: 2005577054637913801}
   m_PrefabAsset: {fileID: 0}
@@ -717,9 +736,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2005577054637913801}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2004156297714508731 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1420827811599730, guid: aaad727b67e004b408be5595d3d8a829,
+--- !u!198 &8359720271159734509 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8058783610192676388, guid: aaad727b67e004b408be5595d3d8a829,
     type: 3}
   m_PrefabInstance: {fileID: 2005577054637913801}
   m_PrefabAsset: {fileID: 0}
@@ -789,6 +808,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SciFiGunHeavyWhite
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277427381175793590, guid: 12621f928a74b698c813a83d77e379a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8269136987784817991, guid: 12621f928a74b698c813a83d77e379a0,
         type: 3}

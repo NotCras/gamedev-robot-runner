@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -17,19 +18,21 @@ public class WeaponZoom : MonoBehaviour
     private RigidbodyFirstPersonController playerMouse;
     private bool zoomedInToggle = false;
     
-    // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Camera>();
-        player.fieldOfView = regularFOV;
-
         playerMouse = GetComponentInParent<RigidbodyFirstPersonController>();
-        
+
+        SetDefaultZoom();
+    }
+
+    private void SetDefaultZoom()
+    {
+        player.fieldOfView = regularFOV;
         playerMouse.mouseLook.XSensitivity = regularMouse;
         playerMouse.mouseLook.YSensitivity = regularMouse;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (CrossPlatformInputManager.GetButtonDown("Fire3"))
@@ -39,17 +42,24 @@ public class WeaponZoom : MonoBehaviour
         
         if(zoomedInToggle)
         {
-            player.fieldOfView = zoomedInFOV;
-            
-            playerMouse.mouseLook.XSensitivity = zoomedInMouse;
-            playerMouse.mouseLook.YSensitivity = zoomedInMouse;
+            ZoomIn();
         }
         else
         {
-            player.fieldOfView = regularFOV;
-            playerMouse.mouseLook.XSensitivity = regularMouse;
-            playerMouse.mouseLook.YSensitivity = regularMouse;
+            SetDefaultZoom();
         }
         
+    }
+
+    private void ZoomIn()
+    {
+        player.fieldOfView = zoomedInFOV;
+        playerMouse.mouseLook.XSensitivity = zoomedInMouse;
+        playerMouse.mouseLook.YSensitivity = zoomedInMouse;
+    }
+
+    private void OnDisable()
+    {
+        SetDefaultZoom();
     }
 }
