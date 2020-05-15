@@ -29,7 +29,6 @@ public class EnemyHealth : MonoBehaviour
     {
         print(name + " is killed.");
         isDead = true;
-
         BroadcastMessage("HasDied");
         //Destroy(this.gameObject);
     }
@@ -37,6 +36,11 @@ public class EnemyHealth : MonoBehaviour
     public bool AmIDead()
     {
         return isDead;
+    }
+
+    public void GoRagdoll()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
     }
     
 }
