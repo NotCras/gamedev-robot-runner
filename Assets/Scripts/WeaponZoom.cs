@@ -23,7 +23,7 @@ public class WeaponZoom : MonoBehaviour
         player = FindObjectOfType<Camera>();
         player.fieldOfView = regularFOV;
 
-        playerMouse = GetComponent<RigidbodyFirstPersonController>();
+        playerMouse = GetComponentInParent<RigidbodyFirstPersonController>();
         
         playerMouse.mouseLook.XSensitivity = regularMouse;
         playerMouse.mouseLook.YSensitivity = regularMouse;
