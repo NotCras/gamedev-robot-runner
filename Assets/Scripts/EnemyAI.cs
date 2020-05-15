@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
     
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float turnSpeed = 4f;
+    [SerializeField] private float runSpeed = 7f;
     
     private Transform target;
     private NavMeshAgent navMeshAgent;
@@ -20,6 +21,8 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = runSpeed;
+        
         RigidbodyFirstPersonController player = FindObjectOfType<RigidbodyFirstPersonController>();
         target = player.transform;
         
@@ -30,7 +33,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (GetComponent<EnemyHealth>().AmIDead())
         {
-            //do nothing
+            enabled = false;
             navMeshAgent.enabled = false;
         }
         else
@@ -45,12 +48,10 @@ public class EnemyAI : MonoBehaviour
 
         if (isProvoked)
         {
-            FaceTarget();
-            ChaseTarget();
+            EngageTarget(distanceToTarget);
         }
         else if (distanceToTarget <= chaseRange)
         {
-            EngageTarget(distanceToTarget);
             isProvoked = true;
         }
         else

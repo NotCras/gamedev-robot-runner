@@ -20,13 +20,18 @@ public class EnemyHealth : MonoBehaviour
 
         if (hitPoints <= 0)
         {
-            print(name + " is killed.");
-            isDead = true;
-            
-            BroadcastMessage("HasDied");
-            //Destroy(this.gameObject);
+            Die();
         }
         
+    }
+
+    private void Die()
+    {
+        print(name + " is killed.");
+        isDead = true;
+
+        BroadcastMessage("HasDied");
+        //Destroy(this.gameObject);
     }
 
     public bool AmIDead()
