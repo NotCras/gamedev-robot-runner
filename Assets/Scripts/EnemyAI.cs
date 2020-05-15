@@ -3,43 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    
     [SerializeField] private float chaseRange = 5f;
     [SerializeField] private float turnSpeed = 4f;
     
+    private Transform target;
     private NavMeshAgent navMeshAgent;
     private float distanceToTarget = Mathf.Infinity;
     private bool isProvoked = false;
+    private Animator anim;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        RigidbodyFirstPersonController player = FindObjectOfType<RigidbodyFirstPersonController>();
+        target = player.transform;
+        
+        anim = GetComponent<Animator>();
     }
 
     void Update()
+    {
+        if (GetComponent<EnemyHealth>().AmIDead())
+        {
+            //do nothing
+            navMeshAgent.enabled = false;
+        }
+        else
+        {
+            SeekAndDestroy();
+        }
+    }
+
+    private void SeekAndDestroy()
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
 
         if (isProvoked)
         {
-            EngageTarget(distanceToTarget);
+            FaceTarget();
+            ChaseTarget();
         }
         else if (distanceToTarget <= chaseRange)
         {
-            ChaseTarget();
+            EngageTarget(distanceToTarget);
             isProvoked = true;
         }
         else
         {
-            GetComponent<Animator>().SetBool("attack", false);
-            GetComponent<Animator>().SetTrigger("idle");
+            anim.SetBool("attack", false);
+            anim.SetTrigger("idle");
             navMeshAgent.SetDestination(transform.position);
         }
     }
-    
+
     private void EngageTarget(float dist)
     {
         FaceTarget();
@@ -55,14 +76,14 @@ public class EnemyAI : MonoBehaviour
 
     private void ChaseTarget()
     {
-        GetComponent<Animator>().SetBool("attack", false);
-        GetComponent<Animator>().SetTrigger("move");
+        anim.SetBool("attack", false);
+        anim.SetTrigger("move");
         navMeshAgent.SetDestination(target.position);
     }
 
     private void AttackTarget()
     {
-        GetComponent<Animator>().SetBool("attack", true);
+        anim.SetBool("attack", true);
     }
 
     private void FaceTarget()
@@ -76,6 +97,11 @@ public class EnemyAI : MonoBehaviour
     public void OnDamageTaken()
     {
         isProvoked = true;
+    }
+
+    public void HasDied()
+    {
+        anim.SetTrigger("die");
     }
     private void OnDrawGizmos()
     {
