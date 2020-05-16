@@ -27,6 +27,7 @@ public class EnemyAttack : MonoBehaviour
             return;
         }
 
+        target.GetComponent<DisplayDamage>().ShowDamage();
         target.PlayerTakeDamage(damage);
         
     }
