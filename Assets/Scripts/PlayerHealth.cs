@@ -1,12 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
     [FormerlySerializedAs("PlayerHealth")] [SerializeField] private float playerHealth = 100f;
+    [SerializeField] private TextMeshProUGUI healthText;
 
+    private void Update()
+    {
+        healthText.text = playerHealth.ToString();
+    }
+    
     public void PlayerTakeDamage(float damage)
     {
         playerHealth -= damage;
